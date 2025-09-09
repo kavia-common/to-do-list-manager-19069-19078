@@ -1,0 +1,85 @@
+.item {
+  display: grid;
+  grid-template-columns: 32px 1fr auto;
+  gap: 12px;
+  align-items: start;
+  padding: 12px;
+  border: 1px solid #e6e8eb;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.item + .item {
+  margin-top: 10px;
+}
+
+.item.completed .title {
+  text-decoration: line-through;
+  color: #6b7280;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 4px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.title {
+  font-weight: 600;
+  color: #111827;
+}
+
+.badges .badge {
+  font-size: 0.75rem;
+  background: #f1f5f9;
+  color: #334155;
+  border-radius: 9999px;
+  padding: 4px 8px;
+}
+
+.desc {
+  color: #374151;
+}
+
+.meta {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  padding: 6px 10px;
+  border: 1px solid #d0d7de;
+  background: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.btn.danger {
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.btn:hover {
+  filter: brightness(0.98);
+}

@@ -1,0 +1,57 @@
+<section class="page">
+  <header class="header">
+    <h1 class="title">To-Do List</h1>
+
+    <div class="controls">
+      <div class="search">
+        <input
+          type="text"
+          placeholder="Search tasks..."
+          [ngModel]="query()"
+          (ngModelChange)="query.set($event)"
+        />
+      </div>
+
+      <div class="filters">
+        <button class="chip" [class.active]="filter==='all'" (click)="filter='all'">All</button>
+        <button class="chip" [class.active]="filter==='open'" (click)="filter='open'">Open</button>
+        <button class="chip" [class.active]="filter==='completed'" (click)="filter='completed'">Completed</button>
+      </div>
+
+      <button class="btn" style="background:#1976d2;color:#fff;border-color:#1976d2" (click)="startCreate()">+ New Task</button>
+    </div>
+  </header>
+
+  <div class="notification" *ngIf="notifier.message() as msg" [class.success]="notifier.type()==='success'" [class.error]="notifier.type()==='error'">
+    {{ msg }}
+  </div>
+
+  <div class="panel" *ngIf="showCreate()">
+    <h2 class="panel-title">Create Task</h2>
+    <app-task-form (save)="createTask($event)" (cancel)="cancelForm()"></app-task-form>
+  </div>
+
+  <div class="panel" *ngIf="editing() as editTask">
+    <h2 class="panel-title">Edit Task</h2>
+    <app-task-form [model]="editTask" (save)="updateTask($event)" (cancel)="cancelForm()"></app-task-form>
+  </div>
+
+  <div class="state" *ngIf="loading()">Loading tasks...</div>
+  <div class="state error" *ngIf="!loading() && error()">{{ error() }}</div>
+
+  <div *ngIf="!loading() && !error()">
+    <div *ngIf="filtered().length === 0" class="empty">
+      <p>No tasks found. Create your first task!</p>
+    </div>
+
+    <div class="list" *ngIf="filtered().length > 0">
+      <app-task-list-item
+        *ngFor="let task of filtered()"
+        [task]="task"
+        (toggled)="toggleComplete($event)"
+        (edit)="startEdit($event)"
+        (remove)="deleteTask($event)"
+      ></app-task-list-item>
+    </div>
+  </div>
+</section>
