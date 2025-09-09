@@ -1,0 +1,21 @@
+<form (ngSubmit)="onSubmit()" class="form" novalidate>
+  <div class="field">
+    <label for="title">Title</label>
+    <input id="title" name="title" [ngModel]="title()" (ngModelChange)="title.set($event)" required placeholder="e.g., Buy groceries" />
+  </div>
+
+  <div class="field">
+    <label for="description">Description</label>
+    <textarea id="description" name="description" rows="3" [ngModel]="description()" (ngModelChange)="description.set($event)" placeholder="Optional details"></textarea>
+  </div>
+
+  <div class="field">
+    <label for="dueDate">Due Date</label>
+    <input id="dueDate" name="dueDate" type="date" [ngModel]="dueDate()" (ngModelChange)="dueDate.set($event || null)" />
+  </div>
+
+  <div class="actions">
+    <button type="submit" class="btn primary">{{ isEdit() ? 'Update' : 'Add Task' }}</button>
+    <button type="button" class="btn" (click)="onCancel()">Cancel</button>
+  </div>
+</form>
